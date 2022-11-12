@@ -83,32 +83,32 @@ public class VetRestController implements VetsApi {
         return new ResponseEntity<>(vetMapper.toVetDto(vet), headers, HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasRole(@roles.VET_ADMIN)")
-    @Override
-    public ResponseEntity<VetDto> updateVet(Integer vetId,VetDto vetDto)  {
-        Vet currentVet = this.clinicService.findVetById(vetId);
-        if (currentVet == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        currentVet.setFirstName(vetDto.getFirstName());
-        currentVet.setLastName(vetDto.getLastName());
-        currentVet.clearSpecialties();
-        for (Specialty spec : specialtyMapper.toSpecialtys(vetDto.getSpecialties())) {
-            currentVet.addSpecialty(spec);
-        }
-        this.clinicService.saveVet(currentVet);
-        return new ResponseEntity<>(vetMapper.toVetDto(currentVet), HttpStatus.NO_CONTENT);
-    }
-
-    @PreAuthorize("hasRole(@roles.VET_ADMIN)")
-    @Transactional
-    @Override
-    public ResponseEntity<VetDto> deleteVet(Integer vetId) {
-        Vet vet = this.clinicService.findVetById(vetId);
-        if (vet == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        this.clinicService.deleteVet(vet);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+//    @PreAuthorize("hasRole(@roles.VET_ADMIN)")
+//    @Override
+//    public ResponseEntity<VetDto> updateVet(Integer vetId,VetDto vetDto)  {
+//        Vet currentVet = this.clinicService.findVetById(vetId);
+//        if (currentVet == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        currentVet.setFirstName(vetDto.getFirstName());
+//        currentVet.setLastName(vetDto.getLastName());
+//        currentVet.clearSpecialties();
+//        for (Specialty spec : specialtyMapper.toSpecialtys(vetDto.getSpecialties())) {
+//            currentVet.addSpecialty(spec);
+//        }
+//        this.clinicService.saveVet(currentVet);
+//        return new ResponseEntity<>(vetMapper.toVetDto(currentVet), HttpStatus.NO_CONTENT);
+//    }
+//
+//    @PreAuthorize("hasRole(@roles.VET_ADMIN)")
+//    @Transactional
+//    @Override
+//    public ResponseEntity<VetDto> deleteVet(Integer vetId) {
+//        Vet vet = this.clinicService.findVetById(vetId);
+//        if (vet == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        this.clinicService.deleteVet(vet);
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    }
 }

@@ -69,31 +69,31 @@ public class PetRestController implements PetsApi {
     }
 
 
-    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
-    @Override
-    public ResponseEntity<PetDto> updatePet(Integer petId, PetDto petDto) {
-        Pet currentPet = this.clinicService.findPetById(petId);
-        if (currentPet == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        currentPet.setBirthDate(petDto.getBirthDate());
-        currentPet.setName(petDto.getName());
-        currentPet.setType(petMapper.toPetType(petDto.getType()));
-        this.clinicService.savePet(currentPet);
-        return new ResponseEntity<>(petMapper.toPetDto(currentPet), HttpStatus.NO_CONTENT);
-    }
+//    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+//    @Override
+//    public ResponseEntity<PetDto> updatePet(Integer petId, PetDto petDto) {
+//        Pet currentPet = this.clinicService.findPetById(petId);
+//        if (currentPet == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        currentPet.setBirthDate(petDto.getBirthDate());
+//        currentPet.setName(petDto.getName());
+//        currentPet.setType(petMapper.toPetType(petDto.getType()));
+//        this.clinicService.savePet(currentPet);
+//        return new ResponseEntity<>(petMapper.toPetDto(currentPet), HttpStatus.NO_CONTENT);
+//    }
 
-    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
-    @Transactional
-    @Override
-    public ResponseEntity<PetDto> deletePet(Integer petId) {
-        Pet pet = this.clinicService.findPetById(petId);
-        if (pet == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        this.clinicService.deletePet(pet);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+//    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+//    @Transactional
+//    @Override
+//    public ResponseEntity<PetDto> deletePet(Integer petId) {
+//        Pet pet = this.clinicService.findPetById(petId);
+//        if (pet == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        this.clinicService.deletePet(pet);
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    }
 
 
 }

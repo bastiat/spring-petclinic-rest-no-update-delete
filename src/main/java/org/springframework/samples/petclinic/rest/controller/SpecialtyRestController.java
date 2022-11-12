@@ -81,28 +81,28 @@ public class SpecialtyRestController implements SpecialtiesApi {
         return new ResponseEntity<SpecialtyDto>(specialtyMapper.toSpecialtyDto(specialty), headers, HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasRole(@roles.VET_ADMIN)")
-    @Override
-    public ResponseEntity<SpecialtyDto> updateSpecialty(Integer specialtyId, SpecialtyDto specialtyDto) {
-        Specialty currentSpecialty = this.clinicService.findSpecialtyById(specialtyId);
-        if (currentSpecialty == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        currentSpecialty.setName(specialtyDto.getName());
-        this.clinicService.saveSpecialty(currentSpecialty);
-        return new ResponseEntity<>(specialtyMapper.toSpecialtyDto(currentSpecialty), HttpStatus.NO_CONTENT);
-    }
-
-    @PreAuthorize("hasRole(@roles.VET_ADMIN)")
-    @Transactional
-    @Override
-    public ResponseEntity<SpecialtyDto> deleteSpecialty(Integer specialtyId) {
-        Specialty specialty = this.clinicService.findSpecialtyById(specialtyId);
-        if (specialty == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        this.clinicService.deleteSpecialty(specialty);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+//    @PreAuthorize("hasRole(@roles.VET_ADMIN)")
+//    @Override
+//    public ResponseEntity<SpecialtyDto> updateSpecialty(Integer specialtyId, SpecialtyDto specialtyDto) {
+//        Specialty currentSpecialty = this.clinicService.findSpecialtyById(specialtyId);
+//        if (currentSpecialty == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        currentSpecialty.setName(specialtyDto.getName());
+//        this.clinicService.saveSpecialty(currentSpecialty);
+//        return new ResponseEntity<>(specialtyMapper.toSpecialtyDto(currentSpecialty), HttpStatus.NO_CONTENT);
+//    }
+//
+//    @PreAuthorize("hasRole(@roles.VET_ADMIN)")
+//    @Transactional
+//    @Override
+//    public ResponseEntity<SpecialtyDto> deleteSpecialty(Integer specialtyId) {
+//        Specialty specialty = this.clinicService.findSpecialtyById(specialtyId);
+//        if (specialty == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        this.clinicService.deleteSpecialty(specialty);
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    }
 
 }

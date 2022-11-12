@@ -102,33 +102,33 @@ public class OwnerRestController implements OwnersApi {
         return new ResponseEntity<>(ownerDto, headers, HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
-    @Override
-    public ResponseEntity<OwnerDto> updateOwner(Integer ownerId, OwnerFieldsDto ownerFieldsDto) {
-        Owner currentOwner = this.clinicService.findOwnerById(ownerId);
-        if (currentOwner == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        currentOwner.setAddress(ownerFieldsDto.getAddress());
-        currentOwner.setCity(ownerFieldsDto.getCity());
-        currentOwner.setFirstName(ownerFieldsDto.getFirstName());
-        currentOwner.setLastName(ownerFieldsDto.getLastName());
-        currentOwner.setTelephone(ownerFieldsDto.getTelephone());
-        this.clinicService.saveOwner(currentOwner);
-        return new ResponseEntity<>(ownerMapper.toOwnerDto(currentOwner), HttpStatus.NO_CONTENT);
-    }
+//    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+//    @Override
+//    public ResponseEntity<OwnerDto> updateOwner(Integer ownerId, OwnerFieldsDto ownerFieldsDto) {
+//        Owner currentOwner = this.clinicService.findOwnerById(ownerId);
+//        if (currentOwner == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        currentOwner.setAddress(ownerFieldsDto.getAddress());
+//        currentOwner.setCity(ownerFieldsDto.getCity());
+//        currentOwner.setFirstName(ownerFieldsDto.getFirstName());
+//        currentOwner.setLastName(ownerFieldsDto.getLastName());
+//        currentOwner.setTelephone(ownerFieldsDto.getTelephone());
+//        this.clinicService.saveOwner(currentOwner);
+//        return new ResponseEntity<>(ownerMapper.toOwnerDto(currentOwner), HttpStatus.NO_CONTENT);
+//    }
 
-    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
-    @Transactional
-    @Override
-    public ResponseEntity<OwnerDto> deleteOwner(Integer ownerId) {
-        Owner owner = this.clinicService.findOwnerById(ownerId);
-        if (owner == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        this.clinicService.deleteOwner(owner);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+//    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+//    @Transactional
+//    @Override
+//    public ResponseEntity<OwnerDto> deleteOwner(Integer ownerId) {
+//        Owner owner = this.clinicService.findOwnerById(ownerId);
+//        if (owner == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        this.clinicService.deleteOwner(owner);
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    }
 
     @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
     @Override

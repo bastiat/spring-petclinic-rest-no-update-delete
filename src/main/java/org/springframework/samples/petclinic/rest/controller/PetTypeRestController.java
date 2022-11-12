@@ -76,28 +76,28 @@ public class PetTypeRestController implements PettypesApi {
         return new ResponseEntity<>(petTypeMapper.toPetTypeDto(type), headers, HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasRole(@roles.VET_ADMIN)")
-    @Override
-    public ResponseEntity<PetTypeDto> updatePetType(Integer petTypeId, PetTypeDto petTypeDto) {
-        PetType currentPetType = this.clinicService.findPetTypeById(petTypeId);
-        if (currentPetType == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        currentPetType.setName(petTypeDto.getName());
-        this.clinicService.savePetType(currentPetType);
-        return new ResponseEntity<>(petTypeMapper.toPetTypeDto(currentPetType), HttpStatus.NO_CONTENT);
-    }
-
-    @PreAuthorize("hasRole(@roles.VET_ADMIN)")
-    @Transactional
-    @Override
-    public ResponseEntity<PetTypeDto> deletePetType(Integer petTypeId) {
-        PetType petType = this.clinicService.findPetTypeById(petTypeId);
-        if (petType == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        this.clinicService.deletePetType(petType);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+//    @PreAuthorize("hasRole(@roles.VET_ADMIN)")
+//    @Override
+//    public ResponseEntity<PetTypeDto> updatePetType(Integer petTypeId, PetTypeDto petTypeDto) {
+//        PetType currentPetType = this.clinicService.findPetTypeById(petTypeId);
+//        if (currentPetType == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        currentPetType.setName(petTypeDto.getName());
+//        this.clinicService.savePetType(currentPetType);
+//        return new ResponseEntity<>(petTypeMapper.toPetTypeDto(currentPetType), HttpStatus.NO_CONTENT);
+//    }
+//
+//    @PreAuthorize("hasRole(@roles.VET_ADMIN)")
+//    @Transactional
+//    @Override
+//    public ResponseEntity<PetTypeDto> deletePetType(Integer petTypeId) {
+//        PetType petType = this.clinicService.findPetTypeById(petTypeId);
+//        if (petType == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        this.clinicService.deletePetType(petType);
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    }
 
 }

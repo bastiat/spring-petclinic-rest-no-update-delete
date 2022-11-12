@@ -82,29 +82,29 @@ public class VisitRestController implements VisitsApi {
         return new ResponseEntity<>(visitDto, headers, HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
-    @Override
-    public ResponseEntity<VisitDto> updateVisit(Integer visitId, VisitDto visitDto) {
-        Visit currentVisit = this.clinicService.findVisitById(visitId);
-        if (currentVisit == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        currentVisit.setDate(visitDto.getDate());
-        currentVisit.setDescription(visitDto.getDescription());
-        this.clinicService.saveVisit(currentVisit);
-        return new ResponseEntity<>(visitMapper.toVisitDto(currentVisit), HttpStatus.NO_CONTENT);
-    }
-
-    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
-    @Transactional
-    @Override
-    public ResponseEntity<VisitDto> deleteVisit(Integer visitId) {
-        Visit visit = this.clinicService.findVisitById(visitId);
-        if (visit == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        this.clinicService.deleteVisit(visit);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+//    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+//    @Override
+//    public ResponseEntity<VisitDto> updateVisit(Integer visitId, VisitDto visitDto) {
+//        Visit currentVisit = this.clinicService.findVisitById(visitId);
+//        if (currentVisit == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        currentVisit.setDate(visitDto.getDate());
+//        currentVisit.setDescription(visitDto.getDescription());
+//        this.clinicService.saveVisit(currentVisit);
+//        return new ResponseEntity<>(visitMapper.toVisitDto(currentVisit), HttpStatus.NO_CONTENT);
+//    }
+//
+//    @PreAuthorize("hasRole(@roles.OWNER_ADMIN)")
+//    @Transactional
+//    @Override
+//    public ResponseEntity<VisitDto> deleteVisit(Integer visitId) {
+//        Visit visit = this.clinicService.findVisitById(visitId);
+//        if (visit == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        this.clinicService.deleteVisit(visit);
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    }
 
 }
